@@ -10,9 +10,11 @@ import SwiftData
 
 @Model
 final class Item {
-    var timestamp: Date
+    var timestamp: Date // When you were grateful for
+    var gratitude: String //What are you grateful for
     
-    init(timestamp: Date) {
+    init(timestamp: Date, gratitude: String) {
         self.timestamp = timestamp
+        self.gratitude = gratitude
     }
 }
