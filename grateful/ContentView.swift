@@ -12,24 +12,20 @@ struct ContentView: View {
     @State var showModal : Bool = false
     @State var textField: String = ""
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @Query(sort: \Item.timestamp, order:.reverse) private var items: [Item]
 
     var body: some View {
         NavigationSplitView {
             List {
                 Section(header: Text("Gratitude Diary")){
                     ForEach(items) { item in
-                        NavigationLink {
-                            Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                        } label: {
-                            VStack(alignment: .leading){
-                                Text(item.gratitude)
-                                    .font(.body)
-                                    .fontWeight(.light)
-                                    .foregroundColor(.accentColor)
-                                Text(item.timestamp, format: Date.FormatStyle(date: .abbreviated, time: .shortened))
-                                    .font(.footnote.italic())
-                            }
+                        VStack(alignment: .leading){
+                            Text(item.gratitude)
+                                .font(.body)
+                                .fontWeight(.light)
+                                .foregroundColor(.accentColor)
+                            Text(item.timestamp, format: Date.FormatStyle(date: .abbreviated, time: .shortened))
+                                .font(.footnote.italic())
                         }
                     }
                     .onDelete(perform: deleteItems)
@@ -40,7 +36,13 @@ struct ContentView: View {
                     EditButton()
                 }
                 ToolbarItem(placement: .bottomBar){
-                    Text("\(items.count)")
+                    Text("Gratitude Score: \(items.count)")
+                        .foregroundColor(.white)
+                        .padding()
+                        .background{
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.accentColor)
+                        }
                 }
                 ToolbarItem {
                     Button{
@@ -66,6 +68,7 @@ struct ContentView: View {
                         if textField != ""{
                             addItem(gratitude: textField)
                             showModal = false
+                            textField = "" // reset the text
                         }
                     } label:{
                         ZStack{
