@@ -23,13 +23,20 @@ struct InputView : View{
         VStack{
             Text(l[mood])
                 .font(.title2)
+                .fontWeight(.light)
             TextEditor(text: $textField)
                 .frame(minHeight: 100, maxHeight: 200)
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
                         .stroke(Color.accent, lineWidth: 2)
                 )
-                .padding()
+                
+            HStack {
+                Text("Character count: \(textField.count) \n Min: 50")
+                    .font(.callout)
+                Spacer()
+            }
+            
             Button{
                 if textField != ""{
                     addItem(gratitude: textField, mood: mood)
@@ -39,15 +46,17 @@ struct InputView : View{
             } label:{
                 ZStack{
                     Text("Done")
-                        .font(.title2)
+                        .font(.title)
                         .foregroundColor(.white)
                         .padding(.horizontal)
                         .background(
-                            RoundedRectangle(cornerRadius: 10)
+                            Capsule()
                                 .fill(.accent)
                         )
                 }
             }
+            .disabled(textField.count<50)
+            .opacity(textField.count<50 ? 0.5 : 1.0)
         }
         .navigationBarBackButtonHidden()
         .navigationDestination(isPresented: $shouldNavigate){
@@ -55,9 +64,6 @@ struct InputView : View{
             
         }
         .padding()
-        .onChange(of: items.count) { _, new in
-            print("items.count changed →", new)
-        }
     }
     private func addItem(gratitude: String, mood: Int) {
         withAnimation {

@@ -16,6 +16,7 @@ struct MoodView : View{
         VStack {
             Text("How's your mood today?")
                 .font(.largeTitle)
+                .fontWeight(.light)
             Image(selection)
                 .resizable()
                 .frame(width: 250,height: 250)
@@ -30,7 +31,7 @@ struct MoodView : View{
             
             NavigationLink(destination: InputView(mood: list.firstIndex(of: selection)!)){
                 Text("Next")
-                    .font(.largeTitle.bold())
+                    .font(.title)
                     .foregroundColor(.white)
                     .padding()
                     .background{

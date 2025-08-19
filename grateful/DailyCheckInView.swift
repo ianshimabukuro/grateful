@@ -8,16 +8,15 @@ import SwiftUI
 struct DailyCheckInView : View{
     var body: some View{
         VStack {
-            Image(.capybara)
-                .resizable()
-                .frame(width:200,height:200)
             Text("It's Time to Be Grateful")
-                .font(.largeTitle.bold())
+                .font(.largeTitle)
+                .fontWeight(.light)
                 .foregroundColor(.accent)
             NavigationLink(destination: MoodView()){
                 Text("Daily Check-In")
+                    .font(.title)
                     .foregroundColor(.white)
-                    .padding()
+                    .padding(50)
                     .background{
                         Circle()
                             .fill(.accent)
@@ -25,7 +24,7 @@ struct DailyCheckInView : View{
                             
                     }
             }
-            .padding(.top,40)
+            .padding(.top,100)
         }
         .padding()
         .navigationBarBackButtonHidden()

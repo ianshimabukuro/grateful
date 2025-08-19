@@ -14,7 +14,7 @@ struct MainView : View{
     
     var body: some View{
         VStack{
-            if let last = items.last{
+            if let last = items.first{
                 if !Calendar.current.isDate(last.timestamp, inSameDayAs: Date.now){
                     //if you havent done it today, check in
                     DailyCheckInView()

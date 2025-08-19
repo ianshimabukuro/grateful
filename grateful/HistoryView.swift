@@ -29,30 +29,6 @@ struct HistoryView: View{
                     }
                 }
             }
-            Chart(items) { item in
-                        LineMark(
-                            x: .value("Date", item.timestamp),
-                            y: .value("Mood", moodToScore(item.mood))
-                        )
-                        .foregroundStyle(.blue)
-                        
-                        PointMark(
-                            x: .value("Date", item.timestamp),
-                            y: .value("Mood", moodToScore(item.mood))
-                        )
-                    }
-                    .chartYScale(domain: 0...4) // because we’ll map moods → 0–4
-                    .chartYAxis {
-                        AxisMarks(values: [0,1,2,3,4]) { value in
-                            AxisValueLabel {
-                                if let int = value.as(Int.self) {
-                                    Text(scoreToMood(int))
-                                }
-                            }
-                        }
-                    }
-                    .frame(height: 300)
-                    .padding()
         }
     }
     private func moodToScore(_ mood: String) -> Int {
