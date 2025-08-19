@@ -6,13 +6,20 @@
 //
 import SwiftUI
 struct DailyCheckInView : View{
+    @State private var didTap : Bool = false
     var body: some View{
         VStack {
+            Button(""){
+                didTap.toggle()
+            }
+            .sensoryFeedback(.impact(flexibility: .soft, intensity: 1), trigger: didTap)
             Text("It's Time to Be Grateful")
                 .font(.largeTitle)
                 .fontWeight(.light)
                 .foregroundColor(.accent)
-            NavigationLink(destination: MoodView()){
+            Button{
+                didTap.toggle()
+            }label:{
                 Text("Daily Check-In")
                     .font(.title)
                     .foregroundColor(.white)
@@ -21,12 +28,18 @@ struct DailyCheckInView : View{
                         Circle()
                             .fill(.accent)
                             .scaledToFill()
-                            
+                        
                     }
             }
             .padding(.top,100)
+            
+            
+        
         }
         .padding()
+        .navigationDestination(isPresented: $didTap){
+            MoodView()
+        }
         .navigationBarBackButtonHidden()
     }
 }

@@ -21,6 +21,10 @@ struct InputView : View{
     
     var body:some View{
         VStack{
+            Button(""){
+                shouldNavigate.toggle()
+            }
+            .sensoryFeedback(.impact(flexibility: .soft, intensity: 1), trigger: shouldNavigate)
             Text(l[mood])
                 .font(.title2)
                 .fontWeight(.light)
@@ -57,6 +61,7 @@ struct InputView : View{
             }
             .disabled(textField.count<50)
             .opacity(textField.count<50 ? 0.5 : 1.0)
+            
         }
         .navigationBarBackButtonHidden()
         .navigationDestination(isPresented: $shouldNavigate){

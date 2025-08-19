@@ -21,7 +21,8 @@ struct MainView : View{
                 }
                 else{
                     //look at the previous ones
-                    HistoryView()                }
+                    HistoryView()
+                }
             }
             
             else{

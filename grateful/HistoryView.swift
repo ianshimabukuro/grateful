@@ -7,7 +7,7 @@
 
 import SwiftUI
 import SwiftData
-import Charts
+
 
 struct HistoryView: View{
     @Environment(\.modelContext) private var modelContext
@@ -18,14 +18,21 @@ struct HistoryView: View{
             List {
                 Section(header: Text("Gratitude Diary")){
                     ForEach(items) { item in
-                        VStack(alignment: .leading){
-                            Text(item.gratitude)
-                                .font(.body)
-                                .fontWeight(.light)
-                                .foregroundColor(.accentColor)
-                            Text(item.timestamp, format: Date.FormatStyle(date: .abbreviated, time: .shortened))
-                                .font(.footnote.italic())
-                        }
+                            VStack(alignment: .leading){
+                                Text(item.gratitude)
+                                    .font(.body)
+                                    .fontWeight(.light)
+                                    .foregroundColor(.accentColor)
+                                HStack {
+                                    Text(item.timestamp, format: Date.FormatStyle(date: .abbreviated, time: .shortened))
+                                        .font(.footnote.italic())
+                                        .fontWeight(.light)
+                                    Spacer()
+                                    Image(item.mood)
+                                        .resizable()
+                                        .frame(width: 20,height: 20)
+                                }
+                            }
                     }
                 }
             }
