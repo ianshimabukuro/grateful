@@ -11,7 +11,7 @@ import SwiftData
 struct InputView : View{
     
     
-    @State var textField : String = "wadwdawdawdawd awdawdawdawdawdaw dawdaw dawdawdawdawdaw dawdawd awd awd awdawdawdawdawdawdawdawdawd"
+    @State var textField : String = ""
     @State var shouldNavigate : Bool = false
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Item.timestamp, order:.reverse) private var items: [Item]
