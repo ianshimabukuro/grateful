@@ -23,7 +23,7 @@ struct ContentView: View {
             content.sound = .default
 
             var dateComponents = DateComponents()
-            dateComponents.hour = 9
+            dateComponents.hour = 21
             dateComponents.minute = 0
 
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)

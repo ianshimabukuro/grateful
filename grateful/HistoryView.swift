@@ -11,6 +11,7 @@ import SwiftData
 
 struct HistoryView: View{
     @Environment(\.modelContext) private var modelContext
+    @State private var shouldNavigate : Bool = false
     @Query(sort: \Item.timestamp, order:.reverse) private var items: [Item]
     
     var body: some View{
@@ -36,6 +37,18 @@ struct HistoryView: View{
                     }
                 }
             }
+            .toolbar{
+                ToolbarItem{
+                    Button{
+                        shouldNavigate = true
+                    }label:{
+                        Image(systemName: "plus")
+                    }
+                }
+            }
+        }
+        .navigationDestination(isPresented: $shouldNavigate){
+            MoodView()
         }
     }
     private func moodToScore(_ mood: String) -> Int {
